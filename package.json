@@ -1,0 +1,16 @@
+{
+  "name": "fullstack",
+  "private": true,
+  "scripts": {
+    "start": "concurrently \"npm:server\" \"npm:client\"",
+    "server": "npm --prefix ./express-server start",
+    "client": "npm --prefix ./API-Integration run dev"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  },
+  "dependencies": {
+    "cookie-parser": "^1.4.7",
+    "jsonwebtoken": "^9.0.2"
+  }
+}
