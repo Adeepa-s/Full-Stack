@@ -87,3 +87,12 @@ export const login = async (req, res) => {
         res.status(500).json({ message: 'Server error' });
     }
 };
+
+export const checkAuth = async (req, res) => {
+    try {
+        const user = await Auth.findById(req.user.userId).select('-password');
+        res.json({ user, authenticated: true });
+    } catch (error) {
+        res.status(401).json({ authenticated: false });
+    }
+};
