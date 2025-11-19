@@ -23,14 +23,14 @@ export const signup = async (req, res) => {
         const savedUser = await user.save();
         console.log('User saved to MongoDB:', savedUser._id);
         
-        const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '7d' });
+        const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '24h' });
         
         res.cookie('token', token, {
             httpOnly: true,
             secure: false,
             sameSite: 'lax',
             domain: 'localhost',
-            maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
+            maxAge: 24 * 60 * 60 * 1000 // 24 hours
         });
         
         res.status(201).json({
@@ -64,14 +64,14 @@ export const login = async (req, res) => {
         }
         
         console.log('Login successful for user:', user._id);
-        const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '7d' });
+        const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '24h' });
         
         res.cookie('token', token, {
             httpOnly: true,
             secure: false,
             sameSite: 'lax',
             domain: 'localhost',
-            maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
+            maxAge: 24 * 60 * 60 * 1000 // 24 hours
         });
         
         res.json({
